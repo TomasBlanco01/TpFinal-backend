@@ -1,11 +1,13 @@
-import pkg from "pg";
-const { Pool } = pkg;
+import app from "./app.js";
+import pool from "./config/db.js";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, async () => {
+  try {
+    await pool.connect();
+    console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
+  } catch (err) {
+    console.error("❌ Error conectando a la BD:", err);
+  }
 });
-
-export default pool;
