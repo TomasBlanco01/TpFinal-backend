@@ -9,7 +9,8 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, async () => {
   try {
     await pool.connect();
-    console.log(`✅ Servidor escuchando en http://localhost:${PORT}`);
+    const host = process.env.PORT ? "https://tpfinal-backend-bcdr.onrender.com" : `http://localhost:${PORT}`;
+    console.log(`✅ Servidor escuchando en ${host}`);
   } catch (err) {
     console.error("❌ Error conectando a la BD:", err);
   }
