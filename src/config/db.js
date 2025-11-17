@@ -1,13 +1,17 @@
-import app from "./app.js";
-import pool from "./config/db.js";
+import pkg from "pg";
+import dotenv from "dotenv";
 
-const PORT = process.env.PORT || 3001;
+dotenv.config();
 
-app.listen(PORT, async () => {
-  try {
-    await pool.connect();
-    console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
-  } catch (err) {
-    console.error("❌ Error conectando a la BD:", err);
-  }
+const { Pool } = pkg;
+
+const connectionString = process.env.DATABASE_URL;
+
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+export default pool;
