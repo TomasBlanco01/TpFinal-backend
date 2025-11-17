@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, async () => {
   try {
     await pool.connect();
-    console.log(`✅ Servidor escuchando en http://localhost:${PORT}`);
+    console.log(`✅ Servidor escuchando en puerto: ${PORT}`);
   } catch (err) {
     console.error("❌ Error conectando a la BD:", err);
   }
